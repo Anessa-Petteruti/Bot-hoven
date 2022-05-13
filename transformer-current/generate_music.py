@@ -1,4 +1,3 @@
-from midi_parser import MIDI_parser
 from model import Music_transformer
 import numpy as np
 import argparse
