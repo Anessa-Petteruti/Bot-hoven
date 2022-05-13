@@ -1,9 +1,6 @@
 from midi_parser import MIDI_parser
 from model import Music_transformer
-import config_music as config
-from utils import get_quant_time, generate_midis
 import numpy as np
-import tensorflow as tf
 import argparse
 import os
 import pathlib
@@ -65,9 +62,6 @@ if __name__ == '__main__':
     assert len(midi_filenames) == args.n_songs
     assert len(set(midi_filenames)) == len(midi_filenames)
 
-    # ============================================================
-    # ============================================================
-
     npz_filenames = list(pathlib.Path(args.npz_dir).rglob('*.npz'))
     assert len(npz_filenames) > 0
     filenames_sample = np.random.choice(
@@ -100,5 +94,4 @@ if __name__ == '__main__':
                     viz_dir, f'layer{layer_idx}_head{head_idx}.png')
                 plt.figure(figsize=(17, 14))
                 plt.step(np.arange(head_weights.shape[1]), head_weights[0])
-                #plt.imsave(img_path, head_weights, cmap='Reds')
                 plt.savefig(img_path)

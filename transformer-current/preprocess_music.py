@@ -1,49 +1,9 @@
-from midi_parser import MIDI_parser
-import config_music as config
-from utils import get_quant_time
 import numpy as np
 import argparse
 import pathlib
-import dload
 
 
 if __name__ == '__main__':
-
-    arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument('-m', '--midi_dir', type=str, default='maestro',
-                            help='Directory where the midi files are stored')
-    arg_parser.add_argument('-np', '--npz_dir', type=str, default='npz_music',
-                            help='Directory where the npz files will be stored')
-    arg_parser.add_argument('-n', '--n_files', type=int, default=None,
-                            help='Number of files to take into account (default: all)')
-    arg_parser.add_argument('-d', '--download', action='store_true',
-                            help='If activated the MAESTRO dataset will be downloaded (mandatory for the first time)')
-
-    args = arg_parser.parse_args()
-
-    if args.download:
-        if not pathlib.Path(args.midi_dir).exists():
-            pathlib.Path(args.midi_dir).mkdir(parents=True, exist_ok=True)
-        else:
-            assert pathlib.Path(args.midi_dir).is_dir()
-
-    if pathlib.Path(args.npz_dir).exists():
-        assert pathlib.Path(args.npz_dir).is_dir()
-    else:
-        pathlib.Path(args.npz_dir).mkdir(parents=True, exist_ok=True)
-
-    if not args.n_files is None:
-        assert isinstance(args.n_files, int)
-        assert args.n_files > 0
-
-    # ============================================================
-    # ============================================================
-
-    if args.download:
-
-        pathlib.Path(args.midi_dir).mkdir(parents=True, exist_ok=True)
-        print('Downloading dataset...')
-        dload.save_unzip(config.dataset_url, args.midi_dir)
 
     ext_list = ['*.midi', '*.mid']
 
